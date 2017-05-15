@@ -11,11 +11,11 @@ class Hand {
 
   pickWinner() {
     this.cards.slice(1).forEach((card) => {
-      if (card.suit === this.winner.suit) {
-        if (card.value > this.winner.value) { card.numericValue() > this.winner.numericValue() }
+      if (card.suit === this.winner.suit && card.numericValue() > this.winner.numericValue()) {
+        this.winner = card;
       } else if (card.suit === 'S') {
         this.winner = card;
-        this.trump = card.suit;
+        this.trump = 'S';
       }
     });
 
