@@ -21,7 +21,7 @@ class JoinGameForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    debugger;
+    this.props.setGameRoom(this.state.gameRoomName);
   }
 
   render() {

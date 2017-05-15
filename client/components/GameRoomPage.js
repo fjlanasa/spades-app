@@ -9,6 +9,18 @@ class GameRoomPage extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.socket.emit('join', this.props.gameRoom, (roomFull) => {
+      if (roomFull) {
+        console.log('room is full');
+        this.props.setGameRoom(null);
+      }
+    });
+    this.props.socket.on('newMessage', function(message) {
+      console.log(message);
+    });
+  }
+
   render() {
     return (
       <div>

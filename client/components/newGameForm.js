@@ -5,9 +5,9 @@ class NewGameForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameRoomName: '',
+      gameRoomName: Math.random().toString(36).substring(2,6),
       playerName: '',
-      gameWinningScore: ''
+      gameWinningScore: '500'
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -30,15 +30,15 @@ class NewGameForm extends Component {
       <form onSubmit={this.handleSubmit} >
         <div>
           <label>Game Room Name</label>
-          <input type='text' name='gameRoomName' value={this.state.gameRoomName} onChange={this.handleChange}/>
+          <input type='text' name='gameRoomName' value={this.state.gameRoomName} onChange={this.handleChange} required/>
         </div>
         <div>
           <label>Game Winning Score</label>
-          <input type='number' name='gameWinningScore' value={this.state.gameWinningScore} onChange={this.handleChange} />
+          <input type='number' name='gameWinningScore' value={this.state.gameWinningScore} onChange={this.handleChange} required/>
         </div>
         <div>
           <label>Your Name</label>
-          <input type='text' name='playerName' value={this.state.playerName} onChange={this.handleChange}/>
+          <input type='text' name='playerName' value={this.state.playerName} onChange={this.handleChange} required/>
         </div>
         <div>
           <input type='submit' value='Create Game' />

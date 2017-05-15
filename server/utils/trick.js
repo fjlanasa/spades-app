@@ -1,4 +1,4 @@
-class Hand {
+class Trick {
   constructor(card) {
     this.cards = [card];
     this.trump = card.suit;
@@ -18,9 +18,8 @@ class Hand {
         this.trump = 'S';
       }
     });
-
     return this.winner;
   }
 }
 
-module.exports = {Hand};
+module.exports = {Trick};
