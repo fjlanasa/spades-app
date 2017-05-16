@@ -9,25 +9,39 @@ let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
 
-app.use(express.static(publicPath));
+const {GameList} = require('./utils/gameList.js');
+const {Game} = require('./utils/game.js');
+const {Player} = require('./utils/player.js');
 
-let numClients = {};
+let gameList = new GameList();
+
+app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
   console.log('new user connected');
-  socket.on('join', (room, callback) => {
-    if (numClients[room] === undefined) {
-      numClients[room] = 1;
-    } else if (numClients[room] < 4) {
-      numClients[room] += 1;
+  socket.on('join', (params, callback) => {
+    let player = new Player(socket.id, params.playerName, params.game),
+        game = gameList.findGame(params.game);
+
+    if (game) {
+      if (game.playerCount() == 4) { return callback(true); }
+      game.addPlayer(player);
     } else {
-      return callback(true);
+      game = new Game(params.game, params.winningScore);
+      game.addPlayer(player);
+      game.owner = player;
+      gameList.addGame(game);
     }
-    socket.join(room);
-    socket.emit('newMessage', 'welcome, you');
-    socket.broadcast.to(room).emit('newMessage', 'new user is here');
-    io.to(room).emit('newMessage', 'here are all the users' + numClients[room]);
+
+    socket.join(params.game);
+    socket.emit('newMessage', gameList);
+    socket.broadcast.to(params.game).emit('newMessage', 'new user is here');
+    io.to(params.game).emit('newMessage', game);
     callback(false);
+  });
+
+  socket.on('getGames', (callback) => {
+    return callback(gameList.games);
   });
 
 

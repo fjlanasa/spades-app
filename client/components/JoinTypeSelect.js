@@ -4,9 +4,6 @@ import { render } from 'react-dom';
 class JoinTypeSelect extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    }
     this.handleChange = this.handleChange.bind(this);
   }
 

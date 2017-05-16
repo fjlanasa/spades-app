@@ -10,10 +10,14 @@ class GameRoomPage extends Component {
   }
 
   componentDidMount() {
-    this.props.socket.emit('join', this.props.gameRoom, (roomFull) => {
+    this.props.socket.emit('join',
+    {
+      game: this.props.gameRoom,
+      playerName: this.props.playerName,
+      winningScore: this.props.winningScore
+    }, (roomFull) => {
       if (roomFull) {
-        console.log('room is full');
-        this.props.setGameRoom(null);
+        this.props.submitGameForm({gameRoomName: null, playerName: null, gameWinningScore: null});
       }
     });
     this.props.socket.on('newMessage', function(message) {

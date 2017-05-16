@@ -7,9 +7,6 @@ import NewGameForm from './NewGameForm';
 class JoinPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    }
   }
 
   render() {
@@ -18,7 +15,7 @@ class JoinPage extends Component {
     if(this.props.joinType == 'new-game') {
       joinForm = <NewGameForm {...this.props}/>;
     } else if (this.props.joinType == 'join-game') {
-      joinForm = <JoinGameForm {...this.props}/>;
+      joinForm = <JoinGameForm {...this.props} socket={this.props.socket}/>;
     }
 
     return (

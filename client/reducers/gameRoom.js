@@ -1,7 +1,7 @@
 function gameRoom(state=null, action) {
   switch(action.type){
-    case 'SET_GAME_ROOM':
-      return action.gameRoom;
+    case 'SUBMIT_GAME_FORM':
+      return action.form.gameRoomName;
     default:
       return state;
   }

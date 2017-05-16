@@ -22,7 +22,8 @@ class NewGameForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.setGameRoom(this.state.gameRoomName);
+    let {gameRoomName, playerName, gameWinningScore} = this.state;
+    this.props.submitGameForm({gameRoomName, playerName, gameWinningScore});
   }
 
   render() {

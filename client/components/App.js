@@ -14,17 +14,20 @@ class App extends Component {
   }
 
   render() {
-    if(this.props.gameRoom) {
+    if(this.props.gameRoom && this.props.playerName) {
       return <GameRoomPage {...this.props} socket={this.socket}/>;
     }
-    return <JoinPage {...this.props} />;
+    return <JoinPage {...this.props} socket={this.socket}/>;
   }
 }
 
 let mapStateToProps = (state) => {
   return {
     joinType: state.joinType,
-    gameRoom: state.gameRoom
+    gameRoom: state.gameRoom,
+    playerName: state.playerName,
+    winningScore: state.winningScore,
+    gameStatus: state.gameStatus
   }
 }
 
