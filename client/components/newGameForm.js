@@ -5,9 +5,9 @@ class NewGameForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameRoomName: Math.random().toString(36).substring(2,6),
+      gameRoomName: '',
       playerName: '',
-      gameWinningScore: '500'
+      gameWinningScore: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,20 +29,48 @@ class NewGameForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} >
-        <div>
-          <label>Game Room Name</label>
-          <input type='text' name='gameRoomName' value={this.state.gameRoomName} onChange={this.handleChange} required/>
+        <div className='form-group'>
+          <label className='sr-only'>Game Room Name</label>
+          <input
+            type='text'
+            className='form-control input-lg'
+            name='gameRoomName'
+            placeholder='Game Room Name'
+            value={this.state.gameRoomName}
+            onChange={this.handleChange}
+            required
+          />
+        </div>
+        <div className='form-group'>
+          <label className='sr-only'>Game Winning Score</label>
+          <input
+            type='number'
+            className='form-control input-lg'
+            name='gameWinningScore'
+            placeholder='What are you playing to?'
+            value={this.state.gameWinningScore}
+            onChange={this.handleChange}
+            required
+          />
+        </div>
+        <div className='form-group'>
+          <label className='sr-only'>Your Name</label>
+          <input
+            type='text'
+            className='form-control input-lg'
+            name='playerName'
+            placeholder='Your Name'
+            value={this.state.playerName}
+            onChange={this.handleChange}
+            required
+          />
         </div>
         <div>
-          <label>Game Winning Score</label>
-          <input type='number' name='gameWinningScore' value={this.state.gameWinningScore} onChange={this.handleChange} required/>
-        </div>
-        <div>
-          <label>Your Name</label>
-          <input type='text' name='playerName' value={this.state.playerName} onChange={this.handleChange} required/>
-        </div>
-        <div>
-          <input type='submit' value='Create Game' />
+          <input
+            className='btn btn-lg'
+            type='submit'
+            value='Create Game'
+          />
         </div>
       </form>
     );

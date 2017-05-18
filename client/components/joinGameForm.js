@@ -58,24 +58,39 @@ class JoinGameForm extends Component {
     let options = this.populateSelect();
     return (
       <form onSubmit={this.handleSubmit} >
-        <div>
-          <label>Game Room Name</label>
-
+        <div className='form-group'>
+          <label className='sr-only'>
+            Game Room Name
+          </label>
           <Select
             disabled={this.state.currentGames.length == 0}
             name='gameRoomName'
             onChange={this.handleSelect}
-            placeholder='Select Game'
+            placeholder='Select a Game'
             options={options}
             value={this.state.gameRoomName}
           />
         </div>
-        <div>
-          <label>Your Name</label>
-          <input type='text' name='playerName' value={this.state.playerName} onChange={this.handleChange} required/>
+        <div className='form-group'>
+          <label className='sr-only'>
+            Your Name
+          </label>
+          <input
+            type='text'
+            className='form-control input-lg'
+            name='playerName'
+            value={this.state.playerName}
+            onChange={this.handleChange}
+            placeholder='Your Name'
+            required
+          />
         </div>
         <div>
-          <input type='submit' value='Join Game' />
+          <input
+            type='submit'
+            className='btn btn-lg'
+            value='Join Game'
+          />
         </div>
       </form>
     );

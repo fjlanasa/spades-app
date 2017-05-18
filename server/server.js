@@ -18,6 +18,7 @@ let gameList = new GameList();
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
+  console.log(socket.id, socket.rooms);
   console.log('new user connected');
   socket.on('join', (params, callback) => {
     let player = new Player(socket.id, params.playerName, params.game),
@@ -46,6 +47,7 @@ io.on('connection', (socket) => {
 
 
   socket.on('disconnect', () => {
+    console.log(socket.id, socket.rooms);
     console.log('disconnected');
   });
 });

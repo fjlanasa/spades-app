@@ -14,10 +14,32 @@ class JoinTypeSelect extends Component {
   render() {
     return (
       <div>
-        <label htmlFor='new-game'>Start a New Game</label>
-        <input type='radio' name='join-type' value='new-game' id='new-game' onChange={this.handleChange}/>
-        <label htmlFor='join-game'>Join a Game</label>
-        <input type='radio' name='join-type' value='join-game' id='join-game' onChange={this.handleChange}/>
+        <input
+          type='radio'
+          className='join-radio'
+          name='join-type'
+          value='new-game'
+          id='new-game'
+          onChange={this.handleChange}
+        />
+        <div className='join-radio-container'>
+          <label className='radio-label' htmlFor='new-game'>
+            Start a New Game
+          </label>
+        </div>
+        <input
+          type='radio'
+          className='join-radio'
+          name='join-type'
+          value='join-game'
+          id='join-game'
+          onChange={this.handleChange}
+        />
+        <div className='join-radio-container'>
+          <label className='radio-label' htmlFor='join-game'>
+            Join a Game
+          </label>
+        </div>
       </div>
     );
   };
