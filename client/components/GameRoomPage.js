@@ -11,17 +11,14 @@ class GameRoomPage extends Component {
 
   componentDidMount() {
     this.props.socket.emit('join',
-    {
-      game: this.props.gameRoom,
-      playerName: this.props.playerName,
-      winningScore: this.props.winningScore
-    }, (roomFull) => {
-      if (roomFull) {
-        this.props.submitGameForm({gameRoomName: null, playerName: null, gameWinningScore: null});
-      }
-    });
-    this.props.socket.on('newMessage', function(message) {
-      console.log(message);
+      {
+        game: this.props.gameRoom,
+        playerName: this.props.playerName,
+        winningScore: this.props.winningScore
+      }, (roomFull) => {
+        if (roomFull) {
+          this.props.submitGameForm({gameRoomName: null, playerName: null, gameWinningScore: null});
+        }
     });
   }
 
