@@ -11,6 +11,10 @@ class GameList {
     let game = this.games.filter((game) => game.name === name)[0];
     return game;
   }
+
+  removeGame(game) {
+    this.games.splice(this.games.indexOf(game));
+  }
 }
 
 module.exports = {GameList};

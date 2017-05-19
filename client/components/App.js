@@ -11,6 +11,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.socket = io();
+    this.socket.on('newMessage', (message) => {
+      console.log(message);
+    });
+
+    this.socket.on('rejoinGame', (rejoinInfo) => {
+      let {gameRoom, playerName, gameWinningScore} = rejoinInfo;
+      this.props.submitGameForm({gameRoomName: gameRoom, playerName: playerName, gameWinningScore: gameWinningScore});
+    });
   }
 
   render() {
