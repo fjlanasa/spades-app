@@ -1,7 +1,7 @@
-const {Player} = require('./player.js');
-const {PlayerList} = require('./playerList.js');
-const {Game} = require('./game.js');
-const {GameList} = require('./gameList.js');
+const {Player} = require('./../models/player.js');
+const {PlayerList} = require('./../models/playerList.js');
+const {Game} = require('./../models/game.js');
+const {GameList} = require('./../models/gameList.js');
 
 let playerList = new PlayerList(),
     gameList = new GameList();

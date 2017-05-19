@@ -10,7 +10,7 @@ let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
 
-let {gameList, alertJoin, findAndRejoin, handleJoin} = require('./utils/joinGameHelpers.js');
+let {gameList, alertJoin, findAndRejoin, handleJoin} = require('./utils/helpers/joinGameHelpers.js');
 
 let sessionMiddleware = session({
     secret: "keyboard cat"

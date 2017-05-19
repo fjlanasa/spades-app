@@ -1,4 +1,4 @@
-function joinType(state=null, action) {
+function joinType(state='new-game', action) {
   switch(action.type){
     case 'SET_JOIN_TYPE':
       return action.joinType

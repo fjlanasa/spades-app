@@ -20,6 +20,7 @@ class JoinPage extends Component {
 
     return (
       <div>
+        <h1>Join a Game</h1>
         <JoinTypeSelect {...this.props}/>
         {joinForm}
       </div>

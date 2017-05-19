@@ -65,9 +65,9 @@ class NewGameForm extends Component {
             required
           />
         </div>
-        <div>
+        <div className='join-button-container'>
           <input
-            className='btn btn-lg'
+            className='btn btn-lg join-button'
             type='submit'
             value='Create Game'
           />

@@ -21,10 +21,11 @@ class JoinTypeSelect extends Component {
           value='new-game'
           id='new-game'
           onChange={this.handleChange}
+          checked={this.props.joinType == 'new-game'}
         />
         <div className='join-radio-container'>
           <label className='radio-label' htmlFor='new-game'>
-            Start a New Game
+            Create
           </label>
         </div>
         <input
@@ -37,7 +38,7 @@ class JoinTypeSelect extends Component {
         />
         <div className='join-radio-container'>
           <label className='radio-label' htmlFor='join-game'>
-            Join a Game
+            Join
           </label>
         </div>
       </div>
