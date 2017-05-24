@@ -1,8 +1,8 @@
 class Game {
-  constructor(name, winningScore) {
+  constructor(name, winningScore, owner) {
     this.name = name;
-    this.owner = null;
-    this.players = [];
+    this.owner = owner;
+    this.players = [owner];
     this.teams = {
       team1: [],
       team2: []

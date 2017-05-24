@@ -1,4 +1,4 @@
-function gameStatus(state='not-joined', action) {
+function gameStatus(state='pending', action) {
   switch(action.type){
     case 'SET_GAME_STATUS':
       return action.gameStatus
