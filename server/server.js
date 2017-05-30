@@ -1,3 +1,5 @@
+require('./config/config');
+
 const path = require('path');
 const http = require('http');
 const express = require('express');
@@ -5,15 +7,15 @@ const socketIO = require('socket.io');
 const session = require('express-session');
 
 const publicPath = path.join(__dirname, '../public');
-let port = process.env.PORT || 3000
 let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
 
+let { mongoose } = require('./db/mongoose');
 let {gameList, alertJoin, findAndRejoin, handleJoin} = require('./utils/helpers/joinGameHelpers.js');
 
 let sessionMiddleware = session({
-    secret: "keyboard cat"
+    secret: process.env.SESSION_SECRET
 });
 
 app.use(sessionMiddleware);
@@ -39,6 +41,6 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(port, () => {
-  console.log('server is up on ' + port );
+server.listen(process.env.PORT, () => {
+  console.log('server is up on ' + process.env.PORT );
 });
