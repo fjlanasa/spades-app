@@ -17,6 +17,7 @@ class App extends Component {
 
     this.socket.on('rejoinGame', (rejoinInfo) => {
       let {gameRoom, playerName, gameWinningScore} = rejoinInfo;
+      debugger;
       this.props.submitGameForm({gameRoomName: gameRoom, playerName: playerName, gameWinningScore: gameWinningScore});
     });
   }

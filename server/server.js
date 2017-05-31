@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('getGames', (callback) => {
-    return callback(gameList.games);
+    return callback([]);
   });
 
   socket.on('disconnect', () => {
