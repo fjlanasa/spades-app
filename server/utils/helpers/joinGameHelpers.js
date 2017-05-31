@@ -24,11 +24,7 @@ let findAndRejoin = (io, socket) => {
 let handleJoin = (io, socket, params, callback) => {
   Player.findOneAndUpdate(
     {sessionId: socket.request.session.id},
-    { $set: {
-      socketId: socket.id,
-      name: params.playerName,
-      room: params.game
-    } },
+    { $set: { socketId: socket.id, name: params.playerName, room: params.game } },
     { upsert: true, new: true }
   ).then((player) => {
     Game.findOne({name: params.game}).then((game) => {
@@ -40,11 +36,7 @@ let handleJoin = (io, socket, params, callback) => {
         } else {
           game.players[players.indexOf(player.sessionId)] = player;
         }
-        game.save().then((game) => {
-          socket.join(params.game);
-          alertJoin(io, socket, game);
-          callback(false);
-        });
+        return game.save();
       } else {
         let newGame = new Game({
           name: params.game,
@@ -52,20 +44,19 @@ let handleJoin = (io, socket, params, callback) => {
           _owner: player,
           players: [player]
         });
-        newGame.save().then((game) => {
-          socket.join(params.game);
-          alertJoin(io, socket, game);
-          callback(false);
-        });
+        return newGame.save();
       }
+    }).then((game) => {
+      socket.join(params.game);
+      alertJoin(io, socket, game);
+      callback(false);
     }).catch((err) => {
       console.log(err);
     });
-  })
+  });
 }
 
 module.exports = {
-  alertJoin,
   findAndRejoin,
   handleJoin
 }

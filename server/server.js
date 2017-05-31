@@ -12,7 +12,9 @@ let server = http.createServer(app);
 let io = socketIO(server);
 
 let { mongoose } = require('./db/mongoose');
-let {gameList, alertJoin, findAndRejoin, handleJoin} = require('./utils/helpers/joinGameHelpers.js');
+let { findAndRejoin, handleJoin } = require('./utils/helpers/joinGameHelpers.js');
+let { Player } = require('./utils/models/player.js');
+let { Game } = require('./utils/models/game.js');
 
 let sessionMiddleware = session({
     secret: process.env.SESSION_SECRET
@@ -33,7 +35,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('getGames', (callback) => {
-    return callback([]);
+    Game.find({}).then((games) => {
+      return callback(games);
+    }, (err) => {
+      console.log(err);
+    })
   });
 
   socket.on('disconnect', () => {

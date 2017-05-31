@@ -20,30 +20,6 @@ let PlayerSchema = new mongoose.Schema({
   }
 });
 
-PlayerSchema.statics.findOrCreate = function (playerDetails) {
-  this.findOneAndUpdate({
-    sessionId: playerDetails.sessionId,
-    name: playerDetails.name
-  },{
-    $set: playerDetails
-  }, {
-    new: true
-  }).then((player) => {
-    if (player) {
-      return player;
-    } else {
-      let newPlayer = new this({
-        sessionId: playerDetails.sessionId,
-        socketId: playerDetails.socketId,
-        name: playerDetails.name,
-        room: playerDetails.room
-      });
-      newPlayer.save();
-      return newPlayer;
-    }
-  });
-}
-
 let Player = mongoose.model('Player', PlayerSchema);
 
 module.exports = {Player};
