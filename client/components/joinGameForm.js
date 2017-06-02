@@ -50,8 +50,8 @@ class JoinGameForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let {gameRoomName, playerName, gameWinningScore} = this.state;
-    this.props.submitGameForm({gameRoomName, playerName, gameWinningScore});
+    let {gameRoomName, playerName, winningScore} = this.state;
+    this.props.setGameInfo({gameRoomName, playerName, winningScore});
   }
 
   render() {

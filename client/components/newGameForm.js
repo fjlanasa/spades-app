@@ -7,7 +7,7 @@ class NewGameForm extends Component {
     this.state = {
       gameRoomName: '',
       playerName: '',
-      gameWinningScore: ''
+      winningScore: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,8 +22,8 @@ class NewGameForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let {gameRoomName, playerName, gameWinningScore} = this.state;
-    this.props.submitGameForm({gameRoomName, playerName, gameWinningScore});
+    let {gameRoomName, playerName, winningScore} = this.state;
+    this.props.setGameInfo({gameRoomName, playerName, winningScore});
   }
 
   render() {
@@ -46,9 +46,9 @@ class NewGameForm extends Component {
           <input
             type='number'
             className='form-control input-lg'
-            name='gameWinningScore'
+            name='winningScore'
             placeholder='What are you playing to?'
-            value={this.state.gameWinningScore}
+            value={this.state.winningScore}
             onChange={this.handleChange}
             required
           />

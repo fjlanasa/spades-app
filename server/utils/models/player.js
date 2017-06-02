@@ -15,7 +15,7 @@ let PlayerSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  room: {
+  game: {
     type: String
   }
 });

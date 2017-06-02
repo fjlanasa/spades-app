@@ -5,10 +5,16 @@ export function setJoinType(joinType) {
   }
 };
 
-export function submitGameForm(form) {
+export function setGameInfo(form) {
   return {
-    type: 'SUBMIT_GAME_FORM',
+    type: 'SET_GAME_INFO',
     form
+  }
+};
+
+export function resetGameInfo() {
+  return {
+    type: 'RESET_GAME_INFO'
   }
 };
 

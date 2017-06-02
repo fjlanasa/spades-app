@@ -13,7 +13,7 @@ function WaitingForPlayersStage(props) {
 
   return (
     <div>
-      <h1>{props.gameRoom}</h1>
+      <h1>{props.gameRoomName}</h1>
       <ul>
         {
           players

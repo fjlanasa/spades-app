@@ -12,7 +12,7 @@ let findAndRejoin = (io, socket) => {
   }).then((player) => {
     if (player) {
       socket.emit('rejoinGame', {
-        gameRoom: player.room,
+        gameRoomName: player.game,
         playerName: player.name
       });
     }
@@ -24,13 +24,13 @@ let findAndRejoin = (io, socket) => {
 let handleJoin = (io, socket, params, callback) => {
   Player.findOneAndUpdate(
     {sessionId: socket.request.session.id},
-    { $set: { socketId: socket.id, name: params.playerName, room: params.game } },
+    { $set: { socketId: socket.id, name: params.playerName, game: params.gameRoomName } },
     { upsert: true, new: true }
   ).then((player) => {
-    Game.findOne({name: params.game}).then((game) => {
+    Game.findOne({name: params.gameRoomName}).then((game) => {
       if (game) {
         let players = game.players.map((p) => { return p.sessionId});
-        if (players.length == 4) return callback(false);
+        if (players.length == 4 && !players.includes(player.sessionId)) return callback(false);
         if (!players.includes(player.sessionId)) {
           game.players.push(player);
         } else {
@@ -39,7 +39,7 @@ let handleJoin = (io, socket, params, callback) => {
         return game.save();
       } else {
         let newGame = new Game({
-          name: params.game,
+          name: params.gameRoomName,
           winningScore: params.winningScore,
           _owner: player,
           players: [player]
@@ -47,7 +47,7 @@ let handleJoin = (io, socket, params, callback) => {
         return newGame.save();
       }
     }).then((game) => {
-      socket.join(params.game);
+      socket.join(params.gameRoomName);
       alertJoin(io, socket, game);
       io.to(game.name).emit('updateGame', {game, status: (game.players.length == 4 ? 'set-teams' : 'pending')});
       callback(true);

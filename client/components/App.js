@@ -25,13 +25,13 @@ class App extends Component {
     });
 
     this.socket.on('rejoinGame', (rejoinInfo) => {
-      let {gameRoom, playerName, gameWinningScore} = rejoinInfo;
-      this.props.submitGameForm({gameRoomName: gameRoom, playerName: playerName, gameWinningScore: gameWinningScore});
+      let {gameRoomName, playerName, winningScore} = rejoinInfo;
+      this.props.setGameInfo({gameRoomName, playerName, winningScore});
     });
   }
 
   render() {
-    if(this.props.gameRoom && this.props.playerName) {
+    if(this.props.gameRoomName && this.props.playerName) {
       return <GameRoomPage {...this.props} socket={this.socket}/>;
     }
     return <JoinPage {...this.props} socket={this.socket}/>;
@@ -41,7 +41,7 @@ class App extends Component {
 let mapStateToProps = (state) => {
   return {
     joinType: state.joinType,
-    gameRoom: state.gameRoom,
+    gameRoomName: state.gameRoomName,
     playerName: state.playerName,
     winningScore: state.winningScore,
     gameStatus: state.gameStatus,

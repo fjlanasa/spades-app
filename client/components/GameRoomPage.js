@@ -13,14 +13,6 @@ class GameRoomPage extends Component {
   }
 
   renderStage() {
-    let players;
-    if (this.props.game) {
-      players = this.props.game.players.map((player, index) => {
-        return (
-          <li key={`${index}`}>{player.name}</li>
-        );
-      });
-    }
     switch(this.props.gameStatus) {
       case 'pending':
         return <WaitingForPlayersStage {...this.props} />
@@ -32,14 +24,11 @@ class GameRoomPage extends Component {
   }
 
   componentWillMount() {
+    let { gameRoomName, playerName, winningScore } = this.props;
     this.props.socket.emit('join',
-      {
-        game: this.props.gameRoom,
-        playerName: this.props.playerName,
-        winningScore: this.props.winningScore
-      }, (game) => {
+      { gameRoomName, playerName, winningScore}, (game) => {
         if (!game) {
-          this.props.submitGameForm({gameRoomName: null, playerName: null, gameWinningScore: null});
+          this.props.resetGameInfo();
         }
     });
   }

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import joinType from './joinType';
-import gameRoom from './gameRoom';
+import gameRoomName from './gameRoomName';
 import playerName from './playerName';
 import winningScore from './winningScore';
 import gameStatus from './gameStatus';
@@ -9,7 +9,7 @@ import id from './id';
 
 const rootReducer = combineReducers({
   joinType,
-  gameRoom,
+  gameRoomName,
   playerName,
   winningScore,
   gameStatus,
