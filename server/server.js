@@ -28,6 +28,7 @@ io.use((socket, next) => {
 });
 
 io.on('connection', (socket) => {
+  socket.emit('setId', socket.request.session.id);
   findAndRejoin(io, socket);
 
   socket.on('join', (params, callback) => {

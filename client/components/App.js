@@ -11,8 +11,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.socket = io();
+
+    this.socket.on('setId', (id) => {
+      this.props.setId(id);
+    });
+
     this.socket.on('newMessage', (message) => {
       console.log(message);
+    });
+
+    this.socket.on('updateGame', (game) => {
+      this.props.updateGame(game);
     });
 
     this.socket.on('rejoinGame', (rejoinInfo) => {
@@ -35,7 +44,9 @@ let mapStateToProps = (state) => {
     gameRoom: state.gameRoom,
     playerName: state.playerName,
     winningScore: state.winningScore,
-    gameStatus: state.gameStatus
+    gameStatus: state.gameStatus,
+    game: state.game,
+    id: state.id
   }
 }
 

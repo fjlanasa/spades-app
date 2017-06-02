@@ -30,7 +30,7 @@ let handleJoin = (io, socket, params, callback) => {
     Game.findOne({name: params.game}).then((game) => {
       if (game) {
         let players = game.players.map((p) => { return p.sessionId});
-        if (players.length == 4) return callback(true);
+        if (players.length == 4) return callback(false);
         if (!players.includes(player.sessionId)) {
           game.players.push(player);
         } else {
@@ -49,7 +49,8 @@ let handleJoin = (io, socket, params, callback) => {
     }).then((game) => {
       socket.join(params.game);
       alertJoin(io, socket, game);
-      callback(false);
+      io.to(game.name).emit('updateGame', {game, status: (game.players.length == 4 ? 'set-teams' : 'pending')});
+      callback(true);
     }).catch((err) => {
       console.log(err);
     });
