@@ -1,3 +1,5 @@
+require('./config/config');
+
 const path = require('path');
 const http = require('http');
 const express = require('express');
@@ -5,15 +7,17 @@ const socketIO = require('socket.io');
 const session = require('express-session');
 
 const publicPath = path.join(__dirname, '../public');
-let port = process.env.PORT || 3000
 let app = express();
 let server = http.createServer(app);
 let io = socketIO(server);
 
-let {gameList, alertJoin, findAndRejoin, handleJoin} = require('./utils/helpers/joinGameHelpers.js');
+let { mongoose } = require('./db/mongoose');
+let { findAndRejoin, handleJoin } = require('./utils/helpers/joinGameHelpers.js');
+let { Player } = require('./utils/models/player.js');
+let { Game } = require('./utils/models/game.js');
 
 let sessionMiddleware = session({
-    secret: "keyboard cat"
+    secret: process.env.SESSION_SECRET
 });
 
 app.use(sessionMiddleware);
@@ -24,6 +28,7 @@ io.use((socket, next) => {
 });
 
 io.on('connection', (socket) => {
+  socket.emit('setId', socket.request.session.id);
   findAndRejoin(io, socket);
 
   socket.on('join', (params, callback) => {
@@ -31,7 +36,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('getGames', (callback) => {
-    return callback(gameList.games);
+    Game.find({}).then((games) => {
+      return callback(games);
+    }, (err) => {
+      console.log(err);
+    })
   });
 
   socket.on('disconnect', () => {
@@ -39,6 +48,6 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(port, () => {
-  console.log('server is up on ' + port );
+server.listen(process.env.PORT, () => {
+  console.log('server is up on ' + process.env.PORT );
 });

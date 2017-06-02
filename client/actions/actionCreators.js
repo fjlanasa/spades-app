@@ -18,3 +18,17 @@ export function setGameStatus(status) {
     status
   }
 };
+
+export function updateGame(game) {
+  return {
+    type: 'UPDATE_GAME',
+    game
+  }
+}
+
+export function setId(id) {
+  return {
+    type: 'SET_ID',
+    id
+  }
+}

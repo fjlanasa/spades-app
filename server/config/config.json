@@ -1,0 +1,12 @@
+{
+  "test": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/SpadesAppTest",
+    "SESSION_SECRET": "alskdfjasdfln988qrnlksd772"
+  },
+  "development": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/SpadesApp",
+    "SESSION_SECRET": "askdf912nlkfs78d1nlfasd"
+  }
+}

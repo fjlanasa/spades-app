@@ -1,2 +1,48 @@
 body {
-  background-color: white; }
+  padding: 0 1.5em;
+  font-size: 18px !important; }
+
+.join-button-container {
+  display: flex;
+  justify-content: center; }
+  .join-button-container .join-button {
+    background-color: #008489;
+    color: white;
+    display: block;
+    font-weight: 700;
+    min-width: 150px; }
+
+.join-radio {
+  display: none; }
+
+.radio-label {
+  background-color: white;
+  border: 1px solid #FF5A5F;
+  color: #FF5A5F;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 15px;
+  text-align: center;
+  width: 100%; }
+
+.join-radio:checked + div > .radio-label {
+  background-color: #FF5A5F;
+  color: white; }
+
+.join-radio-container {
+  display: inline-block;
+  width: 50%; }
+
+.Select--single > .Select-control {
+  height: 46px; }
+  .Select--single > .Select-control .Select-placeholder,
+  .Select--single > .Select-control .Select-value,
+  .Select--single > .Select-control .Select-input {
+    padding-left: 16px !important;
+    padding-right: 16px !important; }
+  .Select--single > .Select-control .Select-placeholder,
+  .Select--single > .Select-control .Select-value-label,
+  .Select--single > .Select-control .Select-input {
+    font-size: 18px;
+    line-height: 42px; }
